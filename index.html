@@ -5,31 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Library</title>
+    <meta name="description" content="A responsive, accessible, and dark-themed library app to manage your books.">
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
 </head>
 
 <body>
-    <h1>My Library</h1>
-    <button id="newBookBtn">New Book</button>
-    <div class="books-container" id="booksContainer"></div>
+    <header>
+        <h1>My Library</h1>
+    </header>
 
-    <dialog id="bookDialog">
-        <form id="bookForm">
-            <h3>Add a New Book</h3>
-            <input type="text" name="title" placeholder="Title" required>
-            <input type="text" name="author" placeholder="Author" required>
-            <input type="number" name="pages" placeholder="Number of Pages" min="1" required>
-            <select name="readStatus">
-                <option value="not read">Not Read</option>
-                <option value="read">Read</option>
-            </select>
-            <div>
-                <button type="submit">Add Book</button>
-                <button type="button" id="cancelBtn">Cancel</button>
-            </div>
-        </form>
-    </dialog>
+    <main>
+        <button id="newBookBtn" aria-label="Add new book">New Book</button>
+        <section class="books-container" id="booksContainer" aria-live="polite"></section>
+
+        <dialog id="bookDialog" aria-modal="true" aria-labelledby="dialogTitle">
+            <form id="bookForm">
+                <h2 id="dialogTitle">Add a New Book</h2>
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="author" placeholder="Author" required>
+                <input type="number" name="pages" placeholder="Number of Pages" min="1" required>
+                <select name="readStatus">
+                    <option value="not read">Not Read</option>
+                    <option value="read">Read</option>
+                </select>
+                <div class="buttons">
+                    <button type="submit">Add Book</button>
+                    <button type="button" id="cancelBtn">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+    </main>
 </body>
 
 </html>

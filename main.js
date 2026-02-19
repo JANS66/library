@@ -35,27 +35,27 @@ function displayBooks() {
     container.innerHTML = "";
 
     books.forEach(book => {
-        const card = document.createElement("div");
+        const card = document.createElement("article");
         card.className = "book-card";
         card.setAttribute("data-id", book.id) // associate DOM element with book id
+        card.tabIndex = 0; // accessible focus
 
         card.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.pages}</p>
             <p><strong>Status:</strong> <span class="status">${book.readStatus}</span></p>
-            <button class="toggle-read-btn">Toggle Read Status</button>
-            <button class="remove-btn">Remove</button>
+            <div class="buttons">
+                <button class="toggle-read-btn" aria-label="Toggle read status for ${book.title}">Toggle Read Status</button>
+                <button class="remove-btn" aria-label="Remove ${book.title}">Remove</button>
+            </div>
         `;
 
-        card.querySelector(".remove-btn").addEventListener("click", () => {
-            removeBook(book.id);
-        });
-
+        card.querySelector(".remove-btn").addEventListener("click", () => removeBook(book.id));
         card.querySelector(".toggle-read-btn").addEventListener("click", () => {
             book.toggleReadStatus();
             displayBooks();
-        })
+        });
 
         container.appendChild(card);
     });

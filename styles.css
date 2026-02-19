@@ -1,40 +1,141 @@
+:root {
+    --bg-color: #121212;
+    --card-bg: #1f1f1f;
+    --text-color: #e0e0e0;
+    --accent-color: #bb86fc;
+    --btn-bg: #333;
+    --btn-hover: #444;
+    --border-color: #333;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
 }
 
-.book-card {
-    border: 1px solid #ccc;
-    padding: 12px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-    max-width: 200px;
+header {
+    padding: 1rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.books-container {
-    display: flex;
-    flex-wrap: wrap;
+h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+main {
+    padding: 1rem;
+    max-width: 1200px;
+    margin: auto;
 }
 
 button {
-    padding: 8px 12px;
-    margin: 10px 0;
     cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    background-color: var(--btn-bg);
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+
+button:hover,
+button:focus {
+    background-color: var(--btn-hover);
+    outline: none;
+}
+
+.books-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+    grid-auto-rows: minmax(150px, auto);
+}
+
+.book-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.2s;
+}
+
+.book-card:focus-within,
+.book-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.book-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.book-card p {
+    margin: 0.2rem 0;
+    font-size: 0.9rem;
+}
+
+.book-card .buttons {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
 }
 
 dialog {
-    border: 1px solid #ccc;
     border-radius: 8px;
-    padding: 20px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    width: 90%;
+    max-width: 400px;
 }
 
 dialog form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.5rem;
 }
 
-dialog input, dialog select {
-    padding: 6px;
+input,
+select {
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+input:focus,
+select:focus {
+    outline: 2px solid var(--accent-color);
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .book-card {
+        padding: 0.8rem;
+    }
 }
