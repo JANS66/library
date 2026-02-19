@@ -11,7 +11,25 @@
 
 <body>
     <h1>My Library</h1>
+    <button id="newBookBtn">New Book</button>
     <div class="books-container" id="booksContainer"></div>
+
+    <dialog id="bookDialog">
+        <form id="bookForm">
+            <h3>Add a New Book</h3>
+            <input type="text" name="title" placeholder="Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="number" name="pages" placeholder="Number of Pages" min="1" required>
+            <select name="readStatus">
+                <option value="not read">Not Read</option>
+                <option value="read">Read</option>
+            </select>
+            <div>
+                <button type="submit">Add Book</button>
+                <button type="button" id="cancelBtn">Cancel</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 
 </html>
