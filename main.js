@@ -15,6 +15,14 @@ function addBook(title, author, pages, readStatus) {
     return newBook;
 }
 
+function removeBook(id) {
+    const index = books.findIndex(book => book.id === id);
+    if (index !== -1) {
+        books.splice(index, 1);
+        displayBooks();
+    }
+}
+
 function displayBooks() {
     const container = document.getElementById("booksContainer");
     container.innerHTML = "";
@@ -22,12 +30,20 @@ function displayBooks() {
     books.forEach(book => {
         const card = document.createElement("div");
         card.className = "book-card";
+        card.setAttribute("data-id", book.id) // associate DOM element with book id
+
         card.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.pages}</p>
             <p><strong>Status:</strong> ${book.readStatus}</p>
+            <button class="remove-btn">Remove</button>
         `;
+
+        card.querySelector(".remove-btn").addEventListener("click", () => {
+            removeBook(book.id);
+        });
+
         container.appendChild(card);
     });
 }
