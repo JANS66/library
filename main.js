@@ -8,6 +8,13 @@ function Book(title, author, pages, readStatus) {
     this.readStatus = readStatus;
 }
 
+// Add method to the prototype so all Book instances share the same function.
+// This avoids creating a new copy of toggleRead for every object,
+// improving memory efficiency.
+Book.prototype.toggleReadStatus = function () {
+    this.readStatus = this.readStatus === "read" ? "not read" : "read";
+}
+
 function addBook(title, author, pages, readStatus) {
     const newBook = new Book(title, author, pages, readStatus);
     books.push(newBook);
@@ -36,13 +43,19 @@ function displayBooks() {
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.pages}</p>
-            <p><strong>Status:</strong> ${book.readStatus}</p>
+            <p><strong>Status:</strong> <span class="status">${book.readStatus}</span></p>
+            <button class="toggle-read-btn">Toggle Read Status</button>
             <button class="remove-btn">Remove</button>
         `;
 
         card.querySelector(".remove-btn").addEventListener("click", () => {
             removeBook(book.id);
         });
+
+        card.querySelector(".toggle-read-btn").addEventListener("click", () => {
+            book.toggleReadStatus();
+            displayBooks();
+        })
 
         container.appendChild(card);
     });
