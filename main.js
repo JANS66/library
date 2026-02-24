@@ -1,18 +1,20 @@
 const books = [];
 
-function Book(title, author, pages, readStatus) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.readStatus = readStatus;
-}
+class Book {
+    constructor(title, author, pages, readStatus) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.readStatus = readStatus;
+    }
 
-// Add method to the prototype so all Book instances share the same function.
-// This avoids creating a new copy of toggleRead for every object,
-// improving memory efficiency.
-Book.prototype.toggleReadStatus = function () {
-    this.readStatus = this.readStatus === "read" ? "not read" : "read";
+    // Add method to the prototype so all Book instances share the same function.
+    // This avoids creating a new copy of toggleRead for every object,
+    // improving memory efficiency.
+    toggleReadStatus() {
+        this.readStatus = this.readStatus === "read" ? "not read" : "read";
+    }
 }
 
 function addBook(title, author, pages, readStatus) {
