@@ -59,6 +59,8 @@ A responsive, accessible, and dark-themed web library application to manage book
 - Maintains all existing functionality: add, remove, toggle read status.
 - Improves readability and keeps methods shared on the prototype automatically.
 
+---
+
 ## License
 
 This project is open-source and free to use.
