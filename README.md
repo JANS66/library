@@ -39,7 +39,7 @@ A responsive, accessible, and dark-themed web library application to manage book
 
 - HTML5
 - CSS3 (Flexbox & Grid)
-- JavaScript (ES6+)
+- JavaScript (ES6+ classes and modules)
 - Browser API: `crypto.randomUUID()`, `<dialog>` tag
 
 ---
@@ -47,11 +47,17 @@ A responsive, accessible, and dark-themed web library application to manage book
 ## Best Practices
 
 - Separation of data (`books` array) and UI (DOM).
-- Prototype methods for book behavior (`toggleReadStatus`).
+- Uses ES6 **class** for **Book** objects, with shared methods (`toggleReadStatus`) on the class prototype for efficiency.
 - Responsive, accessible, SEO-friendly, and dark-themed design.
 - Minimal DOM reflows for performance.
 
 ---
+
+## Refactor Notes
+
+- Replaced `Book` constructor function and prototype with ES6 `class`.
+- Maintains all existing functionality: add, remove, toggle read status.
+- Improves readability and keeps methods shared on the prototype automatically.
 
 ## License
 
