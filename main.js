@@ -1,48 +1,48 @@
 const books = [];
 
 class Book {
-    constructor(title, author, pages, readStatus) {
-        this.id = crypto.randomUUID();
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.readStatus = readStatus;
-    }
+  constructor(title, author, pages, readStatus) {
+    this.id = crypto.randomUUID();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.readStatus = readStatus;
+  }
 
-    // Add method to the prototype so all Book instances share the same function.
-    // This avoids creating a new copy of toggleRead for every object,
-    // improving memory efficiency.
-    toggleReadStatus() {
-        this.readStatus = this.readStatus === "read" ? "not read" : "read";
-    }
+  // Add method to the prototype so all Book instances share the same function.
+  // This avoids creating a new copy of toggleRead for every object,
+  // improving memory efficiency.
+  toggleReadStatus() {
+    this.readStatus = this.readStatus === "read" ? "not read" : "read";
+  }
 }
 
 function addBook(title, author, pages, readStatus) {
-    const newBook = new Book(title, author, pages, readStatus);
-    books.push(newBook);
-    displayBooks();
-    return newBook;
+  const newBook = new Book(title, author, pages, readStatus);
+  books.push(newBook);
+  displayBooks();
+  return newBook;
 }
 
 function removeBook(id) {
-    const index = books.findIndex(book => book.id === id);
-    if (index !== -1) {
-        books.splice(index, 1);
-        displayBooks();
-    }
+  const index = books.findIndex((book) => book.id === id);
+  if (index !== -1) {
+    books.splice(index, 1);
+    displayBooks();
+  }
 }
 
 function displayBooks() {
-    const container = document.getElementById("booksContainer");
-    container.innerHTML = "";
+  const container = document.getElementById("booksContainer");
+  container.innerHTML = "";
 
-    books.forEach(book => {
-        const card = document.createElement("article");
-        card.className = "book-card";
-        card.setAttribute("data-id", book.id) // associate DOM element with book id
-        card.tabIndex = 0; // accessible focus
+  books.forEach((book) => {
+    const card = document.createElement("article");
+    card.className = "book-card";
+    card.setAttribute("data-id", book.id); // associate DOM element with book id
+    card.tabIndex = 0; // accessible focus
 
-        card.innerHTML = `
+    card.innerHTML = `
             <h3>${book.title}</h3>
             <p><strong>Author:</strong> ${book.author}</p>
             <p><strong>Pages:</strong> ${book.pages}</p>
@@ -53,15 +53,46 @@ function displayBooks() {
             </div>
         `;
 
-        card.querySelector(".remove-btn").addEventListener("click", () => removeBook(book.id));
-        card.querySelector(".toggle-read-btn").addEventListener("click", () => {
-            book.toggleReadStatus();
-            displayBooks();
-        });
-
-        container.appendChild(card);
+    card
+      .querySelector(".remove-btn")
+      .addEventListener("click", () => removeBook(book.id));
+    card.querySelector(".toggle-read-btn").addEventListener("click", () => {
+      book.toggleReadStatus();
+      displayBooks();
     });
+
+    container.appendChild(card);
+  });
 }
+
+function showError(input, errorSpan, message) {
+  input.classList.add("invalid");
+  errorSpan.textContent = message;
+  errorSpan.style.display = "block";
+}
+
+function clearError(input, errorSpan) {
+  input.classList.remove("invalid");
+  errorSpan.textContent = "";
+  errorSpan.style.display = "none";
+}
+
+const authorError = document.querySelector("#authorError");
+const authorField = document.getElementById("author");
+
+function validateAuthor(inputElement) {
+  const value = inputElement.value.trim();
+
+  if (value === "") {
+    showError(inputElement, authorError, "The author name must be filled!");
+    return false;
+  }
+
+  clearError(inputElement, authorError);
+  return true;
+}
+
+authorField.addEventListener("input", () => validateAuthor(authorField));
 
 const newBookBtn = document.getElementById("newBookBtn");
 const bookDialog = document.getElementById("bookDialog");
@@ -72,7 +103,10 @@ newBookBtn.addEventListener("click", () => bookDialog.showModal());
 cancelBtn.addEventListener("click", () => bookDialog.close());
 
 bookForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  event.preventDefault();
+  const isAuthorValid = validateAuthor(authorField);
+
+  if (isAuthorValid) {
     const formData = new FormData(bookForm);
     const title = formData.get("title");
     const author = formData.get("author");
@@ -80,9 +114,9 @@ bookForm.addEventListener("submit", (event) => {
     const readStatus = formData.get("readStatus");
 
     addBook(title, author, pages, readStatus);
-
-    bookDialog.close()
+    bookDialog.close();
     bookForm.reset();
+  }
 });
 
 addBook("The Great Gatsby", "F. Scott Fitzgerald", 180, "read");

@@ -1,41 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Library</title>
-    <meta name="description" content="A responsive, accessible, and dark-themed library app to manage your books.">
-    <link rel="stylesheet" href="styles.css">
+    <meta
+      name="description"
+      content="A responsive, accessible, and dark-themed library app to manage your books."
+    />
+    <link rel="stylesheet" href="styles.css" />
     <script src="main.js" defer></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <h1>My Library</h1>
+      <h1>My Library</h1>
     </header>
 
     <main>
-        <button id="newBookBtn" aria-label="Add new book">New Book</button>
-        <section class="books-container" id="booksContainer" aria-live="polite"></section>
+      <button id="newBookBtn" aria-label="Add new book">New Book</button>
+      <section
+        class="books-container"
+        id="booksContainer"
+        aria-live="polite"
+      ></section>
 
-        <dialog id="bookDialog" aria-modal="true" aria-labelledby="dialogTitle">
-            <form id="bookForm">
-                <h2 id="dialogTitle">Add a New Book</h2>
-                <input type="text" name="title" placeholder="Title" required>
-                <input type="text" name="author" placeholder="Author" required>
-                <input type="number" name="pages" placeholder="Number of Pages" min="1" required>
-                <select name="readStatus">
-                    <option value="not read">Not Read</option>
-                    <option value="read">Read</option>
-                </select>
-                <div class="buttons">
-                    <button type="submit">Add Book</button>
-                    <button type="button" id="cancelBtn">Cancel</button>
-                </div>
-            </form>
-        </dialog>
+      <dialog id="bookDialog" aria-modal="true" aria-labelledby="dialogTitle">
+        <form id="bookForm" novalidate>
+          <h2 id="dialogTitle">Add a New Book</h2>
+          <input type="text" name="title" placeholder="Title" required />
+          <input
+            type="text"
+            name="author"
+            placeholder="Author"
+            id="author"
+            required
+          />
+          <span class="error-message" id="authorError"></span>
+          <input
+            type="number"
+            name="pages"
+            placeholder="Number of Pages"
+            min="1"
+            required
+          />
+          <select name="readStatus">
+            <option value="not read">Not Read</option>
+            <option value="read">Read</option>
+          </select>
+          <div class="buttons">
+            <button type="submit">Add Book</button>
+            <button type="button" id="cancelBtn">Cancel</button>
+          </div>
+        </form>
+      </dialog>
     </main>
-</body>
-
+  </body>
 </html>
